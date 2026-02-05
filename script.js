@@ -13,4 +13,11 @@ function getComputerChoice() {
     }
 }
 
+function getHumanChoice() {
+    let choice = prompt("Escolha entre pedra, papel ou tesoura.");
+    choice = choice.trim().toLowerCase();
+    return choice;
+}
+
+console.log(getHumanChoice())
 console.log(getComputerChoice())
