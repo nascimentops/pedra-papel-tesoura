@@ -1,7 +1,24 @@
-let humanScore = 0,
-computerScore = 0;
+playGame()
 
-playRound(getHumanChoice(), getComputerChoice())
+function playGame() {
+    let humanScore = 0,
+    computerScore = 0;
+
+    playRound(getHumanChoice(), getComputerChoice());
+    playRound(getHumanChoice(), getComputerChoice());
+    playRound(getHumanChoice(), getComputerChoice());
+    playRound(getHumanChoice(), getComputerChoice());
+    playRound(getHumanChoice(), getComputerChoice());
+
+    if (humanScore > computerScore) {
+        console.log("Você venceu!");
+    } else if (computerScore > humanScore){
+        console.log("Você perdeu!");
+    } else {
+        console.log("Empate!");
+        
+    }
+}
 
 function playRound(humanChoice, computerChoice){
     console.log("sua escolha:", humanChoice);
@@ -43,13 +60,10 @@ function getComputerChoice() {
     switch (rand) {
         case 1:
             return "pedra";
-            break;
         case 2:
             return "papel";
-            break;
         default:
             return "tesoura";
-            break;
     }
 }
 
