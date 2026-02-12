@@ -1,24 +1,26 @@
-playGame()
+const jogador = document.querySelector("#jogador");
+const escolhaTexto = document.querySelector(".escolha");
+let escolhaJogador = "";
 
-function playGame() {
-    let humanScore = 0,
-    computerScore = 0;
+jogador.addEventListener("click", (e) => {
+    let target = e.target;
 
-    playRound(getHumanChoice(), getComputerChoice());
-    playRound(getHumanChoice(), getComputerChoice());
-    playRound(getHumanChoice(), getComputerChoice());
-    playRound(getHumanChoice(), getComputerChoice());
-    playRound(getHumanChoice(), getComputerChoice());
-
-    if (humanScore > computerScore) {
-        console.log("Você venceu!");
-    } else if (computerScore > humanScore){
-        console.log("Você perdeu!");
-    } else {
-        console.log("Empate!");
-        
+    switch (target.id) {
+        case "pedra":
+            escolhaTexto.textContent = "Sua escolha: Pedra";
+            escolhaJogador = "pedra";
+            break;
+        case "papel":
+            escolhaTexto.textContent = "Sua escolha: Papel";
+            escolhaJogador = "papel";
+            break;
+        case "tesoura":
+            escolhaTexto.textContent = "Sua escolha: Tesoura";
+            escolhaJogador = "tesoura";
+            break;
     }
-}
+})
+
 
 function playRound(humanChoice, computerChoice){
     console.log("sua escolha:", humanChoice);
@@ -65,10 +67,4 @@ function getComputerChoice() {
         default:
             return "tesoura";
     }
-}
-
-function getHumanChoice() {
-    let choice = prompt("Escolha entre pedra, papel ou tesoura.");
-    choice = choice.trim().toLowerCase();
-    return choice;
 }
