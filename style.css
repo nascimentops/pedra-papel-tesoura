@@ -1,4 +1,4 @@
-.body{
+*{
     margin: 0;
     padding: 0;
 }
@@ -9,13 +9,42 @@
     text-align: center;
 }
 
-#jogador button {
-    height: 100px;
-    width: 100px;
-    font-size: 16px;
-}
 
 .jogo {
     display: flex;
-    justify-content: space-between;
+    flex: 1 1 auto;
+    height: 550px;
+}
+
+#jogador {
+    display: flex;
+    flex-basis: 50%;
+    justify-content: space-around;
+    align-items: center;
+    background-color: rgb(36, 36, 36);
+}
+
+#jogador button {
+    height: 100px;
+    width: 200px;
+    font-size: 16px;
+    background-color: darkblue;
+    color: white;
+}
+
+#console {
+    display: flex;
+    flex-direction: column;
+    background-color: gray;
+    width: 50%;
+}
+
+.placar {
+    display: flex;
+    justify-content: space-around;
+}
+
+.placar div {
+    font-weight: bold;
+    font-size: 26px;
 }
