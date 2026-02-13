@@ -1,6 +1,18 @@
 const jogador = document.querySelector("#jogador");
 const escolhaTexto = document.querySelector(".escolha");
+const placarJogador = document.querySelector(".placarJogador");
+const placarMaquina = document.querySelector(".placarMaquina");
+const jogadaJogador = document.querySelector(".jogadaJogador");
+const jogadaMaquina = document.querySelector(".jogadaMaquina");
+const resultado = document.querySelector(".resultado");
+const vencedor = document.querySelector(".vencedor");
+const btnJogar = document.querySelector("#jogar");
+const btnReiniciar = document.querySelector("#reiniciar")
 let escolhaJogador = "";
+let escolhaMaquina = "";
+let pontuacaoJogador = 0;
+let pontuacaoMaquina = 0;
+btnReiniciar.disabled = true;
 
 jogador.addEventListener("click", (e) => {
     let target = e.target;
@@ -21,44 +33,57 @@ jogador.addEventListener("click", (e) => {
     }
 })
 
-
-function playRound(humanChoice, computerChoice){
-    console.log("sua escolha:", humanChoice);
-    console.log("escolha da máquina:", computerChoice);
-    
-    if (humanChoice == computerChoice){
-        console.log("empate");
-    } else if (humanChoice == "pedra"){
-        if (computerChoice == "papel") {
-            console.log("Você perdeu, papel ganha de pedra!");
-            computerScore++;
+btnJogar.addEventListener("click", (e) => {
+    if (!escolhaJogador) alert("Escolha uma opção.");
+    else {
+        escolhaMaquina = getComputerChoice();
+        let vencedorRodada = playRound(escolhaJogador, escolhaMaquina);
+        jogadaJogador.textContent = `Você escolheu: ${escolhaJogador}`
+        jogadaMaquina.textContent = `A Máquina escolheu: ${escolhaMaquina}`
+        if (vencedorRodada === "venceu") {
+            resultado.style.color = "green";
+            placarJogador.textContent = `Você: ${pontuacaoJogador}`
+        } else if (vencedorRodada === "perdeu") {
+            resultado.style.color = "red";
+            placarMaquina.textContent = `Máquina: ${pontuacaoMaquina}`
         } else {
-            console.log("Você ganhou, pedra ganha de tesoura!");
-            humanScore++;
+            resultado.style.color = "White";
         }
-    } else if (humanChoice == "tesoura") {
-        if (computerChoice == "pedra") {
-            console.log("Você perdeu, pedra ganha de tesoura!");
-            computerScore++;
+        escolhaJogador = "";
+        resultado.textContent = vencedorRodada;
+    }
+    if (pontuacaoJogador === 5 || pontuacaoMaquina === 5) {
+        btnReiniciar.disabled = false;
+        btnJogar.disabled = true;
+        jogadaJogador.textContent = "";
+        jogadaMaquina.textContent = "";
+        resultado.textContent = "";
+        if (pontuacaoJogador > pontuacaoMaquina){
+            vencedor.style.color = "green";
+            vencedor.textContent = "Você venceu!";
         } else {
-            console.log("Você ganhou, tesoura ganha de papel!");
-            humanScore++;
-        }
-    } else {
-        if (computerChoice == "tesoura") {
-            console.log("Você perdeu, tesoura ganha de papel!");
-            computerScore++;
-        } else {
-            console.log("Você ganhou, papel ganha de pedra!");
-            humanScore++;
+            vencedor.style.color = "red";
+            vencedor.textContent = "Você perdeu!";
         }
     }
-    console.log("Sua pontuação:", humanScore);
-    console.log("Pontuação da máquina:", computerScore);   
-}
+})
+
+btnReiniciar.addEventListener("click", (e) => {
+    pontuacaoJogador = 0;
+    pontuacaoMaquina = 0;
+    placarJogador.textContent = `Você: ${pontuacaoJogador}`
+    placarMaquina.textContent = `Máquina: ${pontuacaoMaquina}`
+    jogadaJogador.textContent = "";
+    jogadaMaquina.textContent = "";
+    resultado.textContent = "";
+    vencedor.textContent = "";
+    btnJogar.disabled = false;
+    btnReiniciar.disabled = true;
+})
+
 
 function getComputerChoice() {
-    let rand = Math.round(Math.random() * (3 - 1) + 1)
+    let rand = Math.floor(Math.random() * 3) + 1
     switch (rand) {
         case 1:
             return "pedra";
@@ -67,4 +92,34 @@ function getComputerChoice() {
         default:
             return "tesoura";
     }
+}
+
+function playRound(humanChoice, computerChoice){
+    if (humanChoice === computerChoice){
+        return "empate";
+    } else if (humanChoice === "pedra"){
+        if (computerChoice === "papel") {
+            pontuacaoMaquina++;
+            return "perdeu";
+        } else {
+            pontuacaoJogador++;
+            return "venceu";
+        }
+    } else if (humanChoice === "tesoura") {
+        if (computerChoice === "pedra") {
+            pontuacaoMaquina++;
+            return "perdeu";
+        } else {
+            pontuacaoJogador++;
+            return "venceu";
+        }
+    } else {
+        if (computerChoice === "tesoura") {
+            pontuacaoMaquina++;
+            return "perdeu";
+        } else {
+            pontuacaoJogador++;
+            return "venceu";
+        }
+    } 
 }

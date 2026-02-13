@@ -8,20 +8,31 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="escolha">Sua escolha: </div>
     <div class="jogo">
-        <div id="jogador">
-            <button id="pedra">Pedra</button>
-            <button id="papel">Papel</button>
-            <button id="tesoura">Tesoura</button>
-        </div>
+        <div class="escolha">Sua escolha: </div>
+        <div class="painel">
+            <div id="jogador">
+                <button id="pedra">Pedra</button>
+                <button id="papel">Papel</button>
+                <button id="tesoura">Tesoura</button>
+            </div>
         <div id="console">
             <div class="placar">
-                <div>Você: 0</div>
-                <div>Máquina: 0</div>
+                <div class="placarJogador">Você: 0</div>
+                <div class="placarMaquina">Máquina: 0</div>
             </div>
+            <div class="logs">
+                <div class="jogadaJogador"></div>
+                <div class="jogadaMaquina"></div>
+                <div class="resultado"></div>
+            </div>
+            <div class="vencedor"></div>
         </div>
+        </div>
+    <div class="opcoes">
+        <button id="jogar">Jogar</button>
+        <button id="reiniciar">Reiniciar</button>
     </div>
-    <button id="jogar">Jogar</button>
+    </div>
 </body>
 </html>
