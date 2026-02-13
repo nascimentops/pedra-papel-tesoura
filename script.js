@@ -50,6 +50,7 @@ btnJogar.addEventListener("click", (e) => {
             resultado.style.color = "White";
         }
         escolhaJogador = "";
+        escolhaTexto.textContent = "Sua escolha: ";
         resultado.textContent = vencedorRodada;
     }
     if (pontuacaoJogador === 5 || pontuacaoMaquina === 5) {
